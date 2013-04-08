@@ -4,7 +4,7 @@ from rooibos.access.models import AccessControl
 from django.contrib.contenttypes.models import ContentType
 
 
-def _proof_of_concept(do_it, default=False):
+def _original_presentation_creation_proof_of_concept(do_it, default=False):
     """
     This is a function containing the code for creating an individual presenation for
     each member of a specified group, and giving Read perms on that presentation to the group
@@ -13,10 +13,10 @@ def _proof_of_concept(do_it, default=False):
     :param default: False
     :return: None
     """
-    # get a variable for member users of group 'environment_sp13_sec12'
-    cl = User.objects.filter(groups__name='environment_sp13_sec12')
+    # get a variable for member users of group 'group_containing_course_members'
+    cl = User.objects.filter(groups__name='group_containing_course_members')
 
     for u in cl:
-        pres = Presentation.objects.create(title=u'Environment photo essay', owner=u)
+        pres = Presentation.objects.create(title=u'Assigned Presentation', owner=u)
         acl = AccessControl.objects.create(content_type=ContentType.objects.get(id=39), object_id=pres.id,
-                                           usergroup=Group.objects.get(name='environment_sp13_sec12'), read=True)
+                                           usergroup=Group.objects.get(name='group_containing_course_members'), read=True)
