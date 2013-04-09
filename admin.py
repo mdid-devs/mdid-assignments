@@ -2,20 +2,48 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from models import Course, Instructor, Student, Assignment
+from models import Semester, Course, Instructor, Student, Assignment
 
-## TODO: add similar manager code for Courses, Students, Assignment Listings & Assignment Objects
-
-
-class InstructorInline(admin.StackedInline):
-    model = Instructor
-    can_delete = False
-    verbose_name_plural = 'instructors'
+## TODO: add pragmatic admin options for errthing
 
 
-class UserAdmin():
-    inlines = (InstructorInline, )
+class SemesterAdmin(admin.ModelAdmin):
+    pass
 
 
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+class CourseAdmin(admin.ModelAdmin):
+    pass
+
+
+class InstructorAdmin(admin.ModelAdmin):
+    pass
+
+
+class StudentAdmin(admin.ModelAdmin):
+    pass
+
+
+class AssignmentAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Semester)
+admin.site.register(Course)
+admin.site.register(Instructor)
+admin.site.register(Student)
+admin.site.register(Assignment)
+
+#
+#
+# class InstructorInline(admin.StackedInline):
+#     model = Instructor
+#     can_delete = False
+#     verbose_name_plural = 'instructors'
+#
+#
+# class UserAdmin():
+#     inlines = (InstructorInline, )
+
+
+#admin.site.unregister(User)
+#admin.site.register(User, UserAdmin)

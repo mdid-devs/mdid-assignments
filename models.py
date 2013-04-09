@@ -4,6 +4,9 @@ from django.contrib.contenttypes.models import ContentType
 
 from django.forms.extras.widgets import SelectDateWidget
 
+# semester names are defined in apps.mdid-settings.settings.py
+from settings import SEMESTER_CHOICES
+
 
 class Course(models.Model):
     """
@@ -11,7 +14,8 @@ class Course(models.Model):
     """
     name = models.SlugField(max_length=50, unique=True)
     course_groups = models.ForeignKey(Group)
-    instructors = models.ManyToManyField(Instructor)
+    # instructors uses a 'string' instead of a name because Instructor is defined elsewhere. What?
+    instructors = models.ManyToManyField('Instructor')
 
     def __unicode__(self):
         return self.name
@@ -22,13 +26,13 @@ class Instructor(models.Model):
     defines an instructor user
     """
     user = models.OneToOneField(User)
-    courses = models.ManyToManyField(Course)
+    courses = models.ManyToManyField(Course, blank=True)
 
     def __unicode__(self):
-        return self.account.username
+        return self.user.username
 
     class Meta:
-        ordering = ('account_name',)
+        ordering = ('user',)
 
 
 class Student(models.Model):
@@ -36,6 +40,26 @@ class Student(models.Model):
     defines a Student
     """
     user = models.OneToOneField(User)
+    courses = models.ManyToManyField(Course, blank=True)
+
+
+class Semester(models.Model):
+    """
+
+    """
+    base = models.CharField(max_length=50,
+                            choices=SEMESTER_CHOICES,
+                            blank=True)
+    year = models.IntegerField(max_length=4)
+    start = models.DateField(auto_now=False,
+                             auto_now_add=False,
+                             blank=True)
+    end = models.DateField(auto_now=False,
+                           auto_now_add=False,
+                           blank=True)
+
+    def __unicode__(self):
+        return ' '.join((Semester.base.value_to_string(self), Semester.year.value_to_string(self)))
 
 
 class Assignment_Listing(models.Model):
@@ -43,7 +67,7 @@ class Assignment_Listing(models.Model):
     The assignment object as created by the instructor
     """
     name = models.CharField(max_length=100)
-    due_date = models.DateTimeField(widget=SelectDateWidget())
+    due_date = models.DateTimeField()  # TODO: why won't it accept widget=SelectDateWidget() ?
     courses = models.ManyToManyField(Course)
 
     def __unicode__(self):
