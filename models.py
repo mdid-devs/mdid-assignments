@@ -45,11 +45,11 @@ class Student(models.Model):
 
 class Semester(models.Model):
     """
-
+    defines a Semester, i.e. a name for a period of time
     """
-    base = models.CharField(max_length=50,
-                            choices=SEMESTER_CHOICES,
-                            blank=True)
+    period = models.CharField(max_length=50,
+                              choices=SEMESTER_CHOICES,
+                              blank=True)
     year = models.IntegerField(max_length=4)
     start = models.DateField(auto_now=False,
                              auto_now_add=False,
@@ -62,19 +62,19 @@ class Semester(models.Model):
         return ' '.join((Semester.base.value_to_string(self), Semester.year.value_to_string(self)))
 
 
-class Assignment_Listing(models.Model):
+class Assignment(models.Model):
     """
     The assignment object as created by the instructor
     """
     name = models.CharField(max_length=100)
-    due_date = models.DateTimeField()  # TODO: why won't it accept widget=SelectDateWidget() ?
+    due_date = models.DateTimeField(SelectDateWidget)  # TODO: why won't it accept widget=SelectDateWidget() ?
     courses = models.ManyToManyField(Course)
 
     def __unicode__(self):
         return self.name
 
 
-class Assignment(models.Model):
+class PresentationAssignment(models.Model):
     """
     associates a presentation object to an assignment, so an instructor can review
     the presentation can be named anything, the link is preserved by the listing attribute
