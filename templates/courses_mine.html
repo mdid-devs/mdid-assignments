@@ -1,15 +1,15 @@
-{% extends "master.html" %}
+{% extends "master_root.html" %}
 {% load ui %}
 {% load humanize %}
 {% load pagination_tags %}
 {% load viewers %}
 
 
-{#{% block javascript %}#}
-{#{{ block.super }}#}
-{#<script type="text/javascript">#}
-{#</script>#}
-{#{% endblock %}#}
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript">
+</script>
+{% endblock %}
 
 {% block raw-content %}
     <form action="{{ request.get_full_path }}" method="POST">{% csrf_token %}
