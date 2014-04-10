@@ -3,8 +3,8 @@ from django.template import TemplateDoesNotExist
 from django.views.generic.simple import direct_to_template
 
 
-def listings(request):
+def mine(request):
     try:
-        return direct_to_template(request, template="listings.html")
+        return direct_to_template(request, template="courses_mine.html")
     except TemplateDoesNotExist:
         raise Http404()
