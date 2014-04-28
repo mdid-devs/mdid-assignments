@@ -1,0 +1,10 @@
+# mdid-assignments assumes it is installed in rooibos.apps
+# see https://github.com/cit-jmu/rooibos-apps for more examples
+# https://github.com/cit-jmu/rooibos (MDID3) for parent app
+ims-lti-py
+lxml
+oauth2
+nose
+
+
+

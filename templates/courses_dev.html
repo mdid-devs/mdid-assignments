@@ -1,0 +1,29 @@
+{% extends "master_root.html" %}
+
+
+{% block content-top %}
+
+    {% autoescape off %}
+        <div id="mdidAssignmentsOut">
+            {{ out|default:"this is my jam" }}
+        </div>
+        <div id="mdidAssignmentsTeaching">
+            {{ teaching|default:"Well, ok there's nothing to, ok, whatever" }}
+        </div>
+        <div id="mdidAssignmentsList">
+            {{ list|default:""}}
+        </div>
+    {%  endautoescape %}
+
+{% endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script>
+
+    console.log('out: ' + mdidAssignmentsOut)
+    console.log('teaching: ' + mdidAssignmentsTeaching)
+    console.log('list: ' + mdidAssignmentsList)
+
+    </script>
+{% endblock %}

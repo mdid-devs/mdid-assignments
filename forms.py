@@ -1,5 +1,6 @@
 from django import forms
-from .models import Course, Instructor, Student, Semester, Assignment, PresentationAssignment
+from django.forms.extras.widgets import SelectDateWidget
+from .models import Course, LTIUser, Semester, Assignment, PresentationAssignment
 
 
 class CourseForm(forms.ModelForm):
@@ -10,16 +11,17 @@ class CourseForm(forms.ModelForm):
 class SemesterForm(forms.ModelForm):
     class Meta:
         model = Semester
+        fields = ('start', 'end', 'year')
+        widgets = {
+            'start': SelectDateWidget(),
+            'end': SelectDateWidget(),
+        }
+
 
 
 class InstructorForm(forms.ModelForm):
     class Meta:
-        model = Instructor
-
-
-class StudentForm(forms.ModelForm):
-    class Meta:
-        model = Student
+        model = LTIUser
 
 
 class AssignmentForm(forms.ModelForm):

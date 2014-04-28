@@ -9,6 +9,7 @@ def _original_presentation_creation_proof_of_concept(do_it, default=False):
     This is a function containing the code for creating an individual presenation for
     each member of a specified group, and giving Read perms on that presentation to the group
     Note: this is really just copied & pasted from the command line
+    Note : If you've read this far, I salute you.
     :param do_it: whether or not this function actually executes. Don't actually pass True, unless you're too curious
     :param default: False
     :return: None
