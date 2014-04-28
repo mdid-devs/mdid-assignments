@@ -1,0 +1,18 @@
+{% extends "master_root.html" %}
+
+
+{% block content %}
+
+    {% autoescape off %}
+        <div id="instructor_in">
+            <h2>Courses you are teaching</h2>
+
+            {% if course_data %}
+
+            {% else %}
+               <p>You are not currently teaching any courses</p>
+            {% endif %}
+
+    {%  endautoescape %}
+
+{% endblock %}
